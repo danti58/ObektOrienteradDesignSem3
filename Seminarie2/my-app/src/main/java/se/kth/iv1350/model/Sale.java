@@ -5,25 +5,40 @@ import java.util.*;
 import se.kth.iv1350.model.DTO.SaleDTO;
 import se.kth.iv1350.model.DTO.DisplayDTO;
 import se.kth.iv1350.model.DTO.RecieptDTO;
+import java.time.LocalTime;
+import java.time.LocalDate;
 
 public class Sale {
-
-	private ArrayList itemDTOList;
-
+		
+	private Java.util.ArayList itemDTOList;
 	private double runningTotal;
-
 	private double priceAfterDiscount;
-
-	private String storeName;
-
-	private String storeAdress;
-
+	private String storeName = "ThatFoodStore";
+	private String storeAdress = "ThatSoreAdress 69";
 	private SaleDTO saleDTO;
-
 	private DisplayDTO displayDTO;
-
 	private RecieptDTO recieptDTO;
+	private double change;
+	
+	
+	
+	private void getTime() {
+		int hejpadig = 10;
+	}	
 
+	
+	public RecieptDTO createRecipt(int cash) {
+		
+		calculateChange(cash);
+		
+		RecieptDTO printReci = new RecieptDTO(storeName, storeAdress, itemList, totalPrice, discount, 
+				priceVAT, LocalDate.now(), LocalTime.now(), cash, change, priceAfterDiscount);
+
+		return null;
+	}
+	
+	
+	
 	public Sale Sale() {
 		return null;
 	}
@@ -32,7 +47,7 @@ public class Sale {
 		return false;
 	}
 
-	public DisplayDTO updateItemQuantity(int itemQuantity) {
+	public DisplayDTO updateItemQuantity(int itemQuantity, int itemIdentifier) {
 		return null;
 	}
 
@@ -52,20 +67,15 @@ public class Sale {
 
 	}
 
-	public void calculateChange() {
-
-	}
 
 	private void calculateRunningTotal() {
 
 	}
 
-	public RecieptDTO createRecipt(int cash) {
-		return null;
+	public void calculateChange(double cash) {
+		change = priceAfterDiscount - cash;
 	}
 
-	private void getTime() {
 
-	}
 
 }
