@@ -21,12 +21,7 @@ public class Sale {
 	private double change;
 	
 	
-	
-	private void getTime() {
-		int hejpadig = 10;
-	}	
-
-	
+		
 	public RecieptDTO createRecipt(int cash) {
 		
 		calculateChange(cash);
