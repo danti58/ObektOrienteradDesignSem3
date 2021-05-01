@@ -26,6 +26,7 @@ public class Sale {
 		
 		calculateChange(cash);
 		
+		int jagharfel = 0;
 
 		RecieptDTO printReci = new RecieptDTO(storeName, storeAdress, itemList, totalPrice, discount,
 				priceVAT, LocalDate.now(), LocalTime.now(), cash, change, priceAfterDiscount);
