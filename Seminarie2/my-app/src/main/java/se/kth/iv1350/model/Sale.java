@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 public class Sale {
 		
-	private Java.util.ArayList itemDTOList;
+	private ArrayList itemDTOList;
 	private double runningTotal;
 	private double priceAfterDiscount;
 	private String storeName = "ThatFoodStore";
