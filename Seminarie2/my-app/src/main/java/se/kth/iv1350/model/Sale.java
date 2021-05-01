@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 public class Sale {
 		
-	private Java.util.ArayList itemDTOList;
+	private ArrayList itemDTOList;
 	private double runningTotal;
 	private double priceAfterDiscount;
 	private String storeName = "ThatFoodStore";
@@ -26,7 +26,7 @@ public class Sale {
 		
 		calculateChange(cash);
 		
-		RecieptDTO printReci = new RecieptDTO(storeName, storeAdress, itemList, totalPrice, discount, 
+		RecieptDTO printReci = new RecieptDTO(storeName, storeAdress, itemList, totalPrice, discount,
 				priceVAT, LocalDate.now(), LocalTime.now(), cash, change, priceAfterDiscount);
 
 		return null;
