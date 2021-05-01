@@ -14,7 +14,7 @@ public class Sale {
 	private double runningTotal;
 	private double priceAfterDiscount;
 	private String storeName = "ThatFoodStore";
-	private String storeAdress = "ThatSoreAdress 69";
+	private String storeAdress = "ThatStoreAdress 69";
 	private SaleDTO saleDTO;
 	private DisplayDTO displayDTO;
 	private RecieptDTO recieptDTO;
@@ -25,6 +25,8 @@ public class Sale {
 	public RecieptDTO createRecipt(int cash) {
 		
 		calculateChange(cash);
+		
+		int hej = 20;
 		
 		RecieptDTO printReci = new RecieptDTO(storeName, storeAdress, itemList, totalPrice, discount,
 				priceVAT, LocalDate.now(), LocalTime.now(), cash, change, priceAfterDiscount);
