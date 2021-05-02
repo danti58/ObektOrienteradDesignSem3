@@ -10,18 +10,24 @@ import se.kth.iv1350.model.DTO.RecieptDTO;
 public class Controller {
 
 	private Sale sale;
-
 	private Discount discount;
-
 	private ExternalAccounting externalAccounting;
-
 	private ExternalInventory externalInventory;
 
 	public void startNewSale() {
 
 	}
 
-	public DisplayDTO addItem(int itemIdentifier, int ItemQuantity) {
+	public DisplayDTO addItem(int itemIdentifier) {
+
+		boolean itemAlreadyAddedThisSale = sale.checkForExistingItem(itemIdentifier);
+
+		if (itemAlreadyAddedThisSale){
+			return sale.addExistingItem(itemIdentifier);
+		}
+		else {
+
+		}
 		return null;
 	}
 

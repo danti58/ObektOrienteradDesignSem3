@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 public class Sale {
 		
-	private ArrayList itemDTOList;
+	private ArrayList<Item> itemList;
 	private double runningTotal;
 	private double priceAfterDiscount;
 	private String storeName = "ThatFoodStore";
@@ -19,35 +19,61 @@ public class Sale {
 	private DisplayDTO displayDTO;
 	private RecieptDTO recieptDTO;
 	private double change;
-	
+
+	public Sale() {
+		itemList = new ArrayList<>();
+
+	}
 	
 		
 	public RecieptDTO createRecipt(int cash) {
 		
-		calculateChange(cash);
+		/*calculateChange(cash);
 		
 
 		RecieptDTO printReci = new RecieptDTO(storeName, storeAdress, itemList, totalPrice, discount,
-				priceVAT, LocalDate.now(), LocalTime.now(), cash, change, priceAfterDiscount);
+				priceVAT, LocalDate.now(), LocalTime.now(), cash, change, priceAfterDiscount);*/
 
 		return null;
 	}
-	
-	
-	
-	public Sale Sale() {
-		return null;
-	}
 
+
+	/*Checks if the item has already been added to the sale by comparing itemIdentifiers with
+	* with Items in the itemList.
+	*/
 	public boolean checkForExistingItem(int itemIdentifier) {
-		return false;
+
+		Item existingItem = findItem(itemIdentifier);
+		if(existingItem != null){
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
-	public DisplayDTO updateItemQuantity(int itemQuantity, int itemIdentifier) {
+	public DisplayDTO addNewItem(Item currentItem) {
+
+		currentItem.quantity++;
+		itemList.add(currentItem);
 		return null;
 	}
 
-	public DisplayDTO addNewItem(Item currentItem, int itemQuantity) {
+	public DisplayDTO addExistingItem(int itemIdentifier){
+
+		Item searchedItem = findItem(itemIdentifier);
+		searchedItem.quantity++;
+
+		return null;
+	}
+
+	private Item findItem(int itemIdentifier){
+
+		for (Item searchedItem : itemList){
+			if(searchedItem.itemIdentifier == itemIdentifier){
+				return searchedItem;
+			}
+		}
 		return null;
 	}
 

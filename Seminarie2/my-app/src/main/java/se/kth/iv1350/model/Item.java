@@ -5,17 +5,27 @@ import java.util.*;
 public class Item {
 
 	public String itemName;
-
 	public int itemIdentifier;
-
-	public int itemVAT;
-
-	public int itemPrice;
-
+	public double itemVAT;
+	public double itemPrice;
 	public int quantity;
 
-	public Item Item(String itemName, int itemIdintifier, int itemVAT, int itemPrice) {
-		return null;
+	public Item (String itemNameIn, int itemIdentifierIn, double itemVATIn, double itemPriceIn) {
+
+		itemName = itemNameIn;
+		itemIdentifier = itemIdentifierIn;
+		itemVAT = itemVATIn;
+		itemPrice = itemPriceIn;
+		quantity = 1;
+	}
+
+	public Item (String itemNameIn, int itemIdentifierIn, double itemVATIn, double itemPriceIn, int quantityIn) {
+
+		itemName = itemNameIn;
+		itemIdentifier = itemIdentifierIn;
+		itemVAT = itemVATIn;
+		itemPrice = itemPriceIn;
+		quantity = quantityIn;
 	}
 
 }
