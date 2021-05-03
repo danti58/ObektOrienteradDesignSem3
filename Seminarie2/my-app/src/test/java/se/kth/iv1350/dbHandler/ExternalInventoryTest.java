@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
+import se.kth.iv1350.model.Item;
 
 public class ExternalInventoryTest {
 
@@ -20,7 +21,27 @@ public class ExternalInventoryTest {
     }
 
     @Test
-    public void testGetExistingItem() {
+    public void testGetExistingItemSuccess() throws Exception {
+        int itemIDToFind = 3;
+
+        Item foundItem = externalInventoryToTest.getExistingItem(itemIDToFind);
+
+        assertTrue(foundItem.itemName == "Meatballs");
+
+
+    }
+
+    @Test
+    public void testGetExistingItemFailed() throws Exception{
+        int itemIDToFind = 34;
+        Item foundItem;
+        try {
+            foundItem = externalInventoryToTest.getExistingItem(itemIDToFind);
+            fail("The item was returned");
+        } catch (Exception re) {
+            assertTrue(re.getMessage().contains(Integer.toString(itemIDToFind)),
+                    "Exception message did not contain itemId");
+        }
 
     }
 }

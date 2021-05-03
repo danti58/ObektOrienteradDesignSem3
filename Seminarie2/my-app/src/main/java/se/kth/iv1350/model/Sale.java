@@ -54,17 +54,25 @@ public class Sale {
 
 	public DisplayDTO addNewItem(Item currentItem) {
 
-		currentItem.quantity++;
+		/*currentItem.quantity++;
+
+		calculateRunningTotal(currentItem.itemPrice);
+		DisplayDTO informationToBeSentToDisplay = new DisplayDTO(runningTotal, currentItem.itemVAT, currentItem.itemPrice, currentItem.itemName);
+*/
+		DisplayDTO informationToBeSentToDisplay = updateItemInSale(currentItem);
 		itemList.add(currentItem);
-		return null;
+
+		return informationToBeSentToDisplay;
 	}
 
 	public DisplayDTO addExistingItem(int itemIdentifier){
 
 		Item searchedItem = findItem(itemIdentifier);
-		searchedItem.quantity++;
 
-		return null;
+		DisplayDTO informationToBeSentToDisplay = updateItemInSale(searchedItem);
+
+
+		return informationToBeSentToDisplay;
 	}
 
 	private Item findItem(int itemIdentifier){
@@ -75,6 +83,16 @@ public class Sale {
 			}
 		}
 		return null;
+	}
+
+	private DisplayDTO updateItemInSale(Item currentItem){
+
+		currentItem.quantity++;
+
+		calculateRunningTotal(currentItem.itemPrice);
+		DisplayDTO informationToBeSentToDisplay = new DisplayDTO(runningTotal, currentItem.itemVAT, currentItem.itemPrice, currentItem.itemName);
+
+		return  informationToBeSentToDisplay;
 	}
 
 	public double getTotalPrice() {
@@ -90,7 +108,8 @@ public class Sale {
 	}
 
 
-	private void calculateRunningTotal() {
+	private void calculateRunningTotal(double itemPrice) {
+		runningTotal += itemPrice;
 
 	}
 

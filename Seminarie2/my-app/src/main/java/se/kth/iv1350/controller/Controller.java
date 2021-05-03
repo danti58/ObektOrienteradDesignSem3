@@ -18,17 +18,18 @@ public class Controller {
 
 	}
 
-	public DisplayDTO addItem(int itemIdentifier) {
+	public DisplayDTO addItem(int itemIdentifier) throws Exception {
 
 		boolean itemAlreadyAddedThisSale = sale.checkForExistingItem(itemIdentifier);
+		DisplayDTO displayMessage;
 
 		if (itemAlreadyAddedThisSale){
-			return sale.addExistingItem(itemIdentifier);
+			displayMessage = sale.addExistingItem(itemIdentifier);
 		}
 		else {
-
+			displayMessage = sale.addNewItem(externalInventory.getExistingItem(itemIdentifier));
 		}
-		return null;
+		return displayMessage;
 	}
 
 	public double endSale() {

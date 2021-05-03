@@ -18,8 +18,10 @@ public class ExternalInventory {
 			}
 		}
 		if (foundItem == null){
-			throw new Exception("No item found");
+			throw new Exception("The identifier does not exist" + itemIdentifier);
 		}
+
+		foundItem.quantity = 0;
 
 		return foundItem;
 	}

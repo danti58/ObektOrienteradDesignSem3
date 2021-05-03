@@ -5,15 +5,16 @@ import java.util.*;
 public class DisplayDTO {
 
 	private double runningTotal;
-
 	private double itemVAT;
-
-	private int itemPrice;
-
+	private double itemPrice;
 	private String itemName;
 
-	DisplayDTO DisplayDTO(int runningTotal, int itemVAT, int itemPrice, String itemName) {
-		return null;
+	public DisplayDTO (double runningTotalIn, double itemVATIn, double itemPriceIn, String itemNameIn) {
+
+		runningTotal = runningTotalIn;
+		itemVAT = itemVATIn;
+		itemPrice = itemPriceIn;
+		itemName = itemNameIn;
 	}
 
 }
