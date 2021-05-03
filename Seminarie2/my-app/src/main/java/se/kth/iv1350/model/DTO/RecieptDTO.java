@@ -1,6 +1,8 @@
 package se.kth.iv1350.model.DTO;
 
 import java.util.*;
+import java.time.LocalTime;
+import java.time.LocalDate;
 
 public class RecieptDTO {
 
@@ -12,20 +14,69 @@ public class RecieptDTO {
 
 	private double totalPrice;
 
-	private double discount;
+	private double totalVATPrice;
 
-	private double priceVAT;
+	private LocalDate date;
 
-	private int date;
-
-	private int time;
+	private LocalTime time;
 
 	private double cash;
 
 	private double change;
 
-	RecieptDTO RecieptDTO(String storeName, String storeAdress, ArrayList itemList, double totalPrice, double discount, double priceVAT, int date, int time, double cash, double change) {
-		return null;
+	public RecieptDTO (String storeNameIn, String storeAdressIn, ArrayList itemListIn, double runningTotalIn, double totalVATPriceIn, LocalDate dateIn, LocalTime timeIn, double cashIn, double changeIn) {
+		
+		storeName = storeNameIn;
+		storeAdress = storeAdressIn;
+		itemList = itemListIn;
+		totalPrice = runningTotalIn;
+		totalVATPrice = totalVATPriceIn;
+		date = dateIn;
+		time = timeIn;
+		cash = cashIn;
+		change = changeIn;
 	}
 
+
+/*
+ * 
+ * 
+ * under this line is the testing gets, not used for the real profram
+ */
+	public String getStoreName() {
+		return storeName;
+		
+	}
+	
+	public String getStoreAdress() {
+		return storeAdress;
+	}
+	
+	public ArrayList getItemList(){
+		return itemList;
+	}
+	
+	public double getTotalPrice(){
+		return totalPrice;
+	}
+	
+	public double getTotalVATPrice() {
+		return totalVATPrice;
+	}
+	
+	public LocalDate getDate() {
+		return date;
+	}
+	
+	public LocalTime getTime() {
+		return time;
+	}
+	
+	public double getCash() {
+		return cash;
+	}
+	
+	public double getChange() {
+			return change;
+	}
 }

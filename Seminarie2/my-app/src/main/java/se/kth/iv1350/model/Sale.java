@@ -10,36 +10,37 @@ import java.time.LocalDate;
 
 public class Sale {
 		
-	private ArrayList itemDTOList;
+
+	private ArrayList<Item> itemList;
 	private double runningTotal;
-	private double priceAfterDiscount;
+	
 	private String storeName = "ThatFoodStore";
 	private String storeAdress = "ThatStoreAdress 69";
 	private SaleDTO saleDTO;
 	private DisplayDTO displayDTO;
 	private RecieptDTO recieptDTO;
 	private double change;
+	private double totalVATPrice;
 	
 	
 		
-	public RecieptDTO createRecipt(int cash) {
+	public RecieptDTO createRecipt(double cash) {
 		
 		calculateChange(cash);
-		
-		int jagharfel = 0;
+		calculateTotalVATPrice();
 
-		RecieptDTO printReci = new RecieptDTO(storeName, storeAdress, itemList, totalPrice, discount,
-				priceVAT, LocalDate.now(), LocalTime.now(), cash, change, priceAfterDiscount);
+		RecieptDTO printReci = new RecieptDTO(storeName, storeAdress, itemList, runningTotal,
+				totalVATPrice, LocalDate.now(), LocalTime.now(), cash, change);
 
-		return null;
+		return printReci;
 	}
 	
 	
 	
-	public Sale Sale() {
-		return null;
-	}
+	public Sale() {
+        itemList = new ArrayList<>();
 
+    }
 	public boolean checkForExistingItem(int itemIdentifier) {
 		return false;
 	}
@@ -48,7 +49,10 @@ public class Sale {
 		return null;
 	}
 
-	public DisplayDTO addNewItem(Item currentItem, int itemQuantity) {
+	public DisplayDTO addNewItem(Item currentItem) {
+
+		currentItem.quantity++;
+		itemList.add(currentItem);
 		return null;
 	}
 
@@ -69,10 +73,36 @@ public class Sale {
 
 	}
 
-	public void calculateChange(double cash) {
-		change = priceAfterDiscount - cash;
+	private void calculateChange(double cash) {
+		change = runningTotal - cash;
+	}
+	
+	private void calculateTotalVATPrice(){
+		totalVATPrice = 0;
+		for (Item var : itemList) 
+		{ 
+		    totalVATPrice += var.itemPrice * var.itemVAT * 0.01;
+		}
 	}
 
+	/*
+	 * 
+	 * Bellow this line are functions only used for testing
+	 * 
+	 * 
+	 */
+	
 
+	public void setRunningTotal(double amountToSet) {
+		runningTotal = amountToSet;
+	}
+	
+	
+	public double getChange() {
+		
+		return change;	
+	}
 
 }
+
+

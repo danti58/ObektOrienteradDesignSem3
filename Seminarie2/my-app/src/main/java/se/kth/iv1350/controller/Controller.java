@@ -33,8 +33,17 @@ public class Controller {
 		return 0;
 	}
 
-	public RecieptDTO paymentTransaction(int cash) {
-		return null;
+	
+	public RecieptDTO paymentTransaction(double cash) {
+		
+		
+		RecieptDTO printReci = sale.createRecipt(cash);
+		externalAccounting.updateAccounting(printReci);			
+		externalInventory.updateInventory(printReci);
+		
+		
+		
+		return printReci;
 	}
 
 	public Controller Controller() {
