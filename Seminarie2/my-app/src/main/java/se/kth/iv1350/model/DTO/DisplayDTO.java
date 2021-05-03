@@ -17,4 +17,19 @@ public class DisplayDTO {
 		itemName = itemNameIn;
 	}
 
+	public double getRunningTotal() {
+		return runningTotal;
+	}
+
+	public double getItemVAT() {
+		return itemVAT;
+	}
+
+	public double getItemPrice() {
+		return itemPrice;
+	}
+
+	public String getItemName() {
+		return itemName;
+	}
 }
