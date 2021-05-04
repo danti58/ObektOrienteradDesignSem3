@@ -16,7 +16,7 @@ public class Item {
 		itemIdentifier = itemIdentifierIn;
 		itemVAT = itemVATIn;
 		itemPrice = itemPriceIn;
-		quantity = 1;
+		quantity = 0;
 	}
 
 	public Item (String itemNameIn, int itemIdentifierIn, double itemVATIn, double itemPriceIn, int quantityIn) {

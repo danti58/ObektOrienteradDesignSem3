@@ -44,8 +44,12 @@ public class Controller {
 		return null;
 	}
 
-	public Controller Controller() {
-		return null;
+
+	//Temporary, will be updated later
+	public Controller() {
+		sale = new Sale();
+		externalInventory = new ExternalInventory();
+
 	}
 
 }

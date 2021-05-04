@@ -54,11 +54,6 @@ public class Sale {
 
 	public DisplayDTO addNewItem(Item currentItem) {
 
-		/*currentItem.quantity++;
-
-		calculateRunningTotal(currentItem.itemPrice);
-		DisplayDTO informationToBeSentToDisplay = new DisplayDTO(runningTotal, currentItem.itemVAT, currentItem.itemPrice, currentItem.itemName);
-*/
 		DisplayDTO informationToBeSentToDisplay = updateItemInSale(currentItem);
 		itemList.add(currentItem);
 

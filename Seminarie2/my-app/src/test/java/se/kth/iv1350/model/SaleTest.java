@@ -56,24 +56,30 @@ public class SaleTest {
 
         DisplayDTO supposedCorrect = saleToTest.addNewItem(newItem);
 
-        boolean isEqual = true;
 
-        if(correctDisplay.getRunningTotal() != supposedCorrect.getRunningTotal()){
-            isEqual = false;
-        }
-        if (correctDisplay.getItemVAT() != supposedCorrect.getItemVAT()){
-            isEqual = false;
-        }
-        if (correctDisplay.getItemPrice() != supposedCorrect.getItemPrice()){
-            isEqual = false;
-        }
-        if (!correctDisplay.getItemName().equals(correctDisplay.getItemName())){
-            isEqual = false;
-        }
+        assertTrue(saleToTest.checkForExistingItem(4));
+        assertEquals(correctDisplay.getRunningTotal(), supposedCorrect.getRunningTotal());
+        assertEquals(correctDisplay.getItemVAT(), supposedCorrect.getItemVAT());
+        assertEquals(correctDisplay.getItemPrice(), supposedCorrect.getItemPrice());
+        assertEquals(correctDisplay.getItemName(), supposedCorrect.getItemName());
+    }
 
+    @Test
+    public void testAddExistingItem(){
+        DisplayDTO correctDisplay = new DisplayDTO(64, 1.25, 32, "New item");
+        int identifierToUpdate = 3;
+        int correctQuantity = 2;
+        Item newItem = new Item("New item", identifierToUpdate, 1.25, 32);
+        System.out.println(newItem.quantity);
+        saleToTest.addNewItem(newItem);
+        DisplayDTO supposedCorrect = saleToTest.addExistingItem(identifierToUpdate);
 
-        assertTrue(isEqual);
-
+        System.out.println(newItem.quantity);
+        assertEquals(newItem.quantity, correctQuantity);
+        assertEquals(correctDisplay.getRunningTotal(), supposedCorrect.getRunningTotal());
+        assertEquals(correctDisplay.getItemVAT(), supposedCorrect.getItemVAT());
+        assertEquals(correctDisplay.getItemPrice(), supposedCorrect.getItemPrice());
+        assertEquals(correctDisplay.getItemName(), supposedCorrect.getItemName());
     }
 
 
