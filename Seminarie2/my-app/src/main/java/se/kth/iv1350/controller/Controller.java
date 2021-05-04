@@ -25,15 +25,22 @@ public class Controller {
 		return null;
 	}
 
+	/*
+	 * gets the total price from sale, and gives it to the view so the cashier can tell the customer what the cost is
+	 */
 	public double endSale() {
-		return 0;
+		return sale.getTotalPrice();
 	}
 
 	public double checkForDiscount(int customerIdentification) {
 		return 0;
 	}
 
-	
+	/*
+	 * 
+	 * Gets all the imporant information from sale for the recipt and returns it to the viw as a DTO
+	 * 
+	 */
 	public RecieptDTO paymentTransaction(double cash) {
 		
 		

@@ -30,6 +30,9 @@ class ControllerTest {
 
 	@AfterEach
 	void tearDown() throws Exception {
+		saleNotTesting = null;
+		reciptDTONotTesting = null;
+		itemListToComapre = null;
 	}
 
 	@Test

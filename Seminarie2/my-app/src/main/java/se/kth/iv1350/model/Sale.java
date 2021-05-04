@@ -22,7 +22,9 @@ public class Sale {
 	private double change;
 	private double totalVATPrice;
 	
-	
+ /*
+  * Calculates change and how much of the price is VAT to then create a reciept to return to the View so it can print out the reciept.	
+  */
 		
 	public RecieptDTO createRecipt(double cash) {
 		
@@ -56,8 +58,12 @@ public class Sale {
 		return null;
 	}
 
+	
+	/*
+	 * Gets the total price.
+	 */
 	public double getTotalPrice() {
-		return 0;
+		return runningTotal;
 	}
 
 	public SaleDTO getSaleDTO(int customerIdentification) {
@@ -73,10 +79,17 @@ public class Sale {
 
 	}
 
+	/*
+	 * Takes the running total and reduses it with the cash given to the cashier to find out how much change the customer is suppose to get back. 
+	 */
 	private void calculateChange(double cash) {
 		change = runningTotal - cash;
 	}
 	
+	/*
+	 * Calculates how much of the total price that the customer is paying is from VAT.
+	 * By taking the price of the items from the itemList and multyplying it by the VAT and 0.01 (as the % is not saved in decimals)
+	 */
 	private void calculateTotalVATPrice(){
 		totalVATPrice = 0;
 		for (Item var : itemList) 

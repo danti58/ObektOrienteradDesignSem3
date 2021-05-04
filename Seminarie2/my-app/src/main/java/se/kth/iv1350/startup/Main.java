@@ -14,5 +14,15 @@ public class Main {
 	private ExternalInventory externalInventory;
 
 	private Controller controller;
-
+	
+	
+	public static void main(String[] args) {
+		Controller contr = new Controller();
+		View View = new View(contr);
+		ExternalAccounting externalAccounting = new ExternalAccounting();
+		ExternalInventory externalInventory = new ExternalInventory();
+		
+		
+		
+	}
 }
