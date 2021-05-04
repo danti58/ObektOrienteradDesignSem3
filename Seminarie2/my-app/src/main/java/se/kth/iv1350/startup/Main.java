@@ -18,10 +18,11 @@ public class Main {
 	
 	public static void main(String[] args) {
 		Controller contr = new Controller();
-		View View = new View(contr);
+		View view = new View(contr);
 		ExternalAccounting externalAccounting = new ExternalAccounting();
 		ExternalInventory externalInventory = new ExternalInventory();
 		
+		view.hardcode();
 		
 		
 	}

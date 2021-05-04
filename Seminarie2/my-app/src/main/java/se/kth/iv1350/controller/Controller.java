@@ -18,7 +18,7 @@ public class Controller {
 	private ExternalInventory externalInventory;
 
 	public void startNewSale() {
-
+		Sale sale = new Sale();
 	}
 
 	public DisplayDTO addItem(int itemIdentifier, int ItemQuantity) {

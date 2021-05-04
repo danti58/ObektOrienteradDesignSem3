@@ -21,5 +21,23 @@ public class View {
 		this.contr = contr;
 	
 	}
+	
+	
+	public void hardcode() {
+		int i = 1;
+		contr.startNewSale();
+		while (i != 0) {
+			System.out.println("what is the item identifier");
+			
+			//någon keybord input
+			contr.addItem(itemIdentifier);
+			//ad another item? 1 = yes 0 = no
+		}
+		
+		contr.endSale();
+		contr.paymentTransaction(10000);
+		
+		
+	}
 
 }
