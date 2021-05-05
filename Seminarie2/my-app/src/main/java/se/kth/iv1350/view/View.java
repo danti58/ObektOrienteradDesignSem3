@@ -24,7 +24,7 @@ public class View {
 	
 	
 	public void hardcode() {
-		int i = 1;
+		/*int i = 1;
 		contr.startNewSale();
 		while (i != 0) {
 			System.out.println("what is the item identifier");
@@ -35,7 +35,7 @@ public class View {
 		}
 		
 		contr.endSale();
-		contr.paymentTransaction(10000);
+		contr.paymentTransaction(10000);*/
 		
 		
 	}
