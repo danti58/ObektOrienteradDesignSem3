@@ -5,15 +5,37 @@ import java.util.*;
 public class DisplayDTO {
 
 	private double runningTotal;
-
 	private double itemVAT;
-
-	private int itemPrice;
-
+	private double itemPrice;
 	private String itemName;
 
-	DisplayDTO DisplayDTO(int runningTotal, int itemVAT, int itemPrice, String itemName) {
-		return null;
+
+	/*
+	*
+	* Creates a DisplayDTO
+	*
+	*/
+	public DisplayDTO (double runningTotalIn, double itemVATIn, double itemPriceIn, String itemNameIn) {
+
+		runningTotal = runningTotalIn;
+		itemVAT = itemVATIn;
+		itemPrice = itemPriceIn;
+		itemName = itemNameIn;
 	}
 
+	public double getRunningTotal() {
+		return runningTotal;
+	}
+
+	public double getItemVAT() {
+		return itemVAT;
+	}
+
+	public double getItemPrice() {
+		return itemPrice;
+	}
+
+	public String getItemName() {
+		return itemName;
+	}
 }

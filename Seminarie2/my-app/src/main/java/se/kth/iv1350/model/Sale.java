@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 public class Sale {
 		
-	private ArrayList itemDTOList;
+	private ArrayList<Item> itemList;
 	private double runningTotal;
 	private double priceAfterDiscount;
 	private String storeName = "ThatFoodStore";
@@ -19,36 +19,97 @@ public class Sale {
 	private DisplayDTO displayDTO;
 	private RecieptDTO recieptDTO;
 	private double change;
-	
-	
-		
-	public RecieptDTO createRecipt(int cash) {
-		
-		calculateChange(cash);
-		
 
-		RecieptDTO printReci = new RecieptDTO(storeName, storeAdress, itemList, totalPrice, discount,
-				priceVAT, LocalDate.now(), LocalTime.now(), cash, change, priceAfterDiscount);
+	public Sale() {
+		itemList = new ArrayList<>();
+
+	}
+	
+		
+	public RecieptDTO createReciept(int cash) {
+
 
 		return null;
 	}
-	
-	
-	
-	public Sale Sale() {
-		return null;
-	}
 
+
+	/*
+	*
+	* Checks if the item has already been added to the sale by comparing itemIdentifiers with
+	* with Items in the itemList.
+	*/
 	public boolean checkForExistingItem(int itemIdentifier) {
-		return false;
+
+		Item existingItem = findItem(itemIdentifier);
+		if(existingItem != null){
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
-	public DisplayDTO updateItemQuantity(int itemQuantity, int itemIdentifier) {
+	/*
+	*
+	* Adds currentItem to the itemList and sends the item to updateItemInSale to update quantity
+	* and make the DisplayDTO that will be returned.
+	*
+	*/
+
+	public DisplayDTO addNewItem(Item currentItem) {
+
+		DisplayDTO informationToBeSentToDisplay = updateItemInSale(currentItem);
+		itemList.add(currentItem);
+
+		return informationToBeSentToDisplay;
+	}
+
+	/*
+	*
+	* Finds the them with the correct identifier and sends it to updateItemInSale to update quantity
+	* and make a DisplayDTO.
+	* Returns a DisplayDTO with relevant information for the customer.
+	*
+	*/
+	public DisplayDTO addExistingItem(int itemIdentifier){
+
+		Item searchedItem = findItem(itemIdentifier);
+
+		DisplayDTO informationToBeSentToDisplay = updateItemInSale(searchedItem);
+
+		return informationToBeSentToDisplay;
+	}
+
+	/*
+	*
+	* Searches for the item with the correctIdentifier
+	*
+	*/
+
+	private Item findItem(int itemIdentifier){
+
+		for (Item searchedItem : itemList){
+			if(searchedItem.itemIdentifier == itemIdentifier){
+				return searchedItem;
+			}
+		}
 		return null;
 	}
 
-	public DisplayDTO addNewItem(Item currentItem, int itemQuantity) {
-		return null;
+	/*
+	*
+	* Updates the quantity of currentItem and makes a DisplayDTO with relevant information.
+	*
+	*/
+
+	private DisplayDTO updateItemInSale(Item currentItem){
+
+		currentItem.quantity++;
+
+		calculateRunningTotal(currentItem.itemPrice);
+		DisplayDTO informationToBeSentToDisplay = new DisplayDTO(runningTotal, currentItem.itemVAT, currentItem.itemPrice, currentItem.itemName);
+
+		return  informationToBeSentToDisplay;
 	}
 
 	public double getTotalPrice() {
@@ -63,8 +124,14 @@ public class Sale {
 
 	}
 
+	/*
+	*
+	* Updates the runningTotal with the price of the item currently being added.
+	*
+	*/
 
-	private void calculateRunningTotal() {
+	private void calculateRunningTotal(double itemPrice) {
+		runningTotal += itemPrice;
 
 	}
 
@@ -72,6 +139,9 @@ public class Sale {
 		change = priceAfterDiscount - cash;
 	}
 
+	/*public int getItemInListQuantity(int itemIdentifier){
+		return findItem(itemIdentifier).quantity;
+	}*/
 
 
 }
