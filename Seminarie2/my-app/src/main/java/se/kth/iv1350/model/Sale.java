@@ -145,7 +145,7 @@ public class Sale {
 	 * Takes the running total and reduses it with the cash given to the cashier to find out how much change the customer is suppose to get back. 
 	 */
 	private void calculateChange(double cash) {
-		change = runningTotal - cash;
+		change = cash - runningTotal;
 	}
 	
 	/*
@@ -156,7 +156,7 @@ public class Sale {
 		totalVATPrice = 0;
 		for (Item var : itemList) 
 		{ 
-		    totalVATPrice += var.itemPrice * var.itemVAT * 0.01;
+		    totalVATPrice += var.itemPrice - (var.itemPrice / var.itemVAT);
 		}
 	}
 

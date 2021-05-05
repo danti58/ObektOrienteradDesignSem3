@@ -9,7 +9,7 @@ public class ExternalAccounting {
 	private ArrayList pastPurchaseList;
 
 	public void updateAccounting(RecieptDTO printReci) {
-
+		
 	}
 
 	public ExternalAccounting ExternalAcconting() {

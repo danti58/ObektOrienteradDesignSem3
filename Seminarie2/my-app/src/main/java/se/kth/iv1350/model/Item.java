@@ -30,7 +30,10 @@ public class Item {
 		quantity = quantityIn;
 	}
 
-	
+	public String toString() {
+		
+		return itemName + "item price " +  String.format("%.2f",itemPrice) + "   ammount "+ quantity + "\n";
+	}
 	
 	
 	
