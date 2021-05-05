@@ -43,6 +43,20 @@ public class RecieptDTO {
  * 
  * under this line is the testing gets, not used for the real profram
  */
+	
+    public String toString(){
+        return storeName + "\n"  + 
+        		storeAdress + "\n" +
+        		date + "\n"  + 
+        		time + "\n" +
+        		itemList + "\n" +
+        		"total price" + totalPrice + "\n" +
+        		"total VAT price" + String.format("%.2f",totalVATPrice) + "\n" +
+        		"payed ammount" + cash + "\n" +
+        		"mony back" + change + "\n";
+    }
+
+	
 	public String getStoreName() {
 		return storeName;
 		

@@ -15,7 +15,7 @@ public class Controller {
 	private ExternalInventory externalInventory;
 
 	public void startNewSale() {
-		Sale sale = new Sale();
+		sale = new Sale();
 	}
 
 	/*
@@ -69,10 +69,10 @@ public class Controller {
 
 
 	//Temporary, will be updated later
-	public Controller() {
-		sale = new Sale();
-		externalInventory = new ExternalInventory();
+	public Controller(ExternalInventory externalInventoryIn, ExternalAccounting externalAccountingIn) {
+        externalInventory = externalInventoryIn;
+        externalAccounting = externalAccountingIn;
 
-	}
+    }
 
 }
