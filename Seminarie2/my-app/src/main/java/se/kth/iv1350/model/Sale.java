@@ -9,10 +9,10 @@ import java.time.LocalTime;
 import java.time.LocalDate;
 
 public class Sale {
-		
+
 	private ArrayList<Item> itemList;
 	private double runningTotal;
-	private double priceAfterDiscount;
+	
 	private String storeName = "ThatFoodStore";
 	private String storeAdress = "ThatStoreAdress 69";
 	private SaleDTO saleDTO;
@@ -20,24 +20,30 @@ public class Sale {
 	private RecieptDTO recieptDTO;
 	private double change;
 
-	public Sale() {
-		itemList = new ArrayList<>();
+	private double totalVATPrice;
+	
+ /*
+  * Calculates change and how much of the price is VAT to then create a reciept to return to the View so it can print out the reciept.	
+  */
+		
+	public RecieptDTO createRecipt(double cash) {
+		
+		calculateChange(cash);
+		calculateTotalVATPrice();
 
+		RecieptDTO printReci = new RecieptDTO(storeName, storeAdress, itemList, runningTotal,
+				totalVATPrice, LocalDate.now(), LocalTime.now(), cash, change);
+
+		return printReci;
 	}
 	
-		
-	public RecieptDTO createReciept(int cash) {
+	
+	
+	public Sale() {
+        itemList = new ArrayList<>();
 
+    }
 
-		return null;
-	}
-
-
-	/*
-	*
-	* Checks if the item has already been added to the sale by comparing itemIdentifiers with
-	* with Items in the itemList.
-	*/
 	public boolean checkForExistingItem(int itemIdentifier) {
 
 		Item existingItem = findItem(itemIdentifier);
@@ -112,8 +118,9 @@ public class Sale {
 		return  informationToBeSentToDisplay;
 	}
 
+
 	public double getTotalPrice() {
-		return 0;
+		return runningTotal;
 	}
 
 	public SaleDTO getSaleDTO(int customerIdentification) {
@@ -135,13 +142,43 @@ public class Sale {
 
 	}
 
-	public void calculateChange(double cash) {
-		change = priceAfterDiscount - cash;
+	/*
+	 * Takes the running total and reduses it with the cash given to the cashier to find out how much change the customer is suppose to get back. 
+	 */
+	private void calculateChange(double cash) {
+		change = runningTotal - cash;
+	}
+	
+	/*
+	 * Calculates how much of the total price that the customer is paying is from VAT.
+	 * By taking the price of the items from the itemList and multyplying it by the VAT and 0.01 (as the % is not saved in decimals)
+	 */
+	private void calculateTotalVATPrice(){
+		totalVATPrice = 0;
+		for (Item var : itemList) 
+		{ 
+		    totalVATPrice += var.itemPrice * var.itemVAT * 0.01;
+		}
 	}
 
-	/*public int getItemInListQuantity(int itemIdentifier){
-		return findItem(itemIdentifier).quantity;
-	}*/
+	/*
+	 * 
+	 * Bellow this line are functions only used for testing
+	 * 
+	 * 
+	 */
 
+
+	public void setRunningTotal(double amountToSet) {
+		runningTotal = amountToSet;
+	}
+	
+	
+	public double getChange() {
+		
+		return change;	
+	}
 
 }
+
+

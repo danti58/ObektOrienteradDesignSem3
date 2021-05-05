@@ -1,3 +1,4 @@
+  
 package se.kth.iv1350.model;
 
 import java.util.*;
@@ -17,6 +18,7 @@ public class Item {
 		itemVAT = itemVATIn;
 		itemPrice = itemPriceIn;
 		quantity = 0;
+
 	}
 
 	public Item (String itemNameIn, int itemIdentifierIn, double itemVATIn, double itemPriceIn, int quantityIn) {
@@ -28,4 +30,8 @@ public class Item {
 		quantity = quantityIn;
 	}
 
+	
+	
+	
+	
 }
