@@ -1,6 +1,7 @@
 package se.kth.iv1350.view;
 
 import se.kth.iv1350.controller.Controller;
+import java.util.Scanner;
 
 
 /*
@@ -24,19 +25,31 @@ public class View {
 	
 	
 	public void hardcode() {
+		Scanner keyboard = new Scanner(System.in);
+		int itemIdentifier;
 		int i = 1;
+		int j;
+		System.out.println("Start new sale? 1 = yes 0 = shut down");
+		j = keyboard.nextInt();
+		while(j == 1) {
 		contr.startNewSale();
 		while (i != 0) {
 			System.out.println("what is the item identifier");
 			
-			//någon keybord input
+			itemIdentifier = keyboard.nextInt();
 			contr.addItem(itemIdentifier);
-			//ad another item? 1 = yes 0 = no
+			
+			System.out.print("Add another item? 1 = yes 0 = no");
+			i = keyboard.nextInt();
+			
 		}
 		
 		contr.endSale();
 		contr.paymentTransaction(10000);
 		
+		System.out.println("Start new sale? 1 = yes 0 = shut down");
+		j = keyboard.nextInt();
+		}
 		
 	}
 

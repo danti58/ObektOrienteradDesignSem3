@@ -20,7 +20,7 @@ class ControllerTest {
 	private Sale saleNotTesting;
 	private RecieptDTO reciptDTONotTesting;
 	private ArrayList<Item> itemListToComapre; 
-
+	private Controller contrToTest;
 
 
 	@BeforeEach
@@ -33,32 +33,22 @@ class ControllerTest {
 		saleNotTesting = null;
 		reciptDTONotTesting = null;
 		itemListToComapre = null;
+		contrToTest = null;
 	}
 
 	@Test
 	void testPaymentTransaction() {
-		double ammountGivenToCashier = 300;
-		double ammountRunningTotal = 2000;
-		double change = ammountRunningTotal - ammountGivenToCashier;
+		int itemIdentifier = 300;
 		
-        Item aItem = new Item("SearchedItem", 2, 25.2, 100.2);
-        Item differentItem = new Item("differentItem", 4, 15, 56);
-        Item anotherItem = new Item("anotherItem", 45, 5, 1004);
-    	double totalVATPrice = differentItem.itemPrice * differentItem.itemVAT * 0.01 +  aItem.itemPrice * aItem.itemVAT * 0.01 + anotherItem.itemPrice * anotherItem.itemVAT * 0.01;
-        saleNotTesting.addNewItem(differentItem);
-        saleNotTesting.addNewItem(aItem);
-        saleNotTesting.addNewItem(anotherItem);
-		saleNotTesting.setRunningTotal(ammountRunningTotal);
-		
-		reciptDTONotTesting = saleNotTesting.createRecipt(ammountGivenToCashier);
-		itemListToComapre = new ArrayList<>();
-		itemListToComapre.add(differentItem);
-		itemListToComapre.add(aItem);
-		itemListToComapre.add(anotherItem);
-		
-		RecieptDTO expectedReciptDTO = new RecieptDTO("ThatFoodStore", "ThatStoreAdress 69", itemListToComapre, ammountRunningTotal,
-				totalVATPrice, LocalDate.now(), LocalTime.now(), ammountGivenToCashier, change);
+		contrToTest.startNewSale();
+		contrToTest.addItem(itemIdentifier);
 
+		contrToTest.paymentTransaction(300);
+		
+		
+		
+		
+		
 		
 		assertEquals(expectedReciptDTO.getCash(), reciptDTONotTesting.getCash(), " cash is wrong");
 		assertEquals(expectedReciptDTO.getChange(), reciptDTONotTesting.getChange(), " change is wrong");
@@ -69,7 +59,6 @@ class ControllerTest {
 		assertEquals(expectedReciptDTO.getStoreName(), reciptDTONotTesting.getStoreName(), " store name is wrong");
 		assertEquals(expectedReciptDTO.getTotalPrice(), reciptDTONotTesting.getTotalPrice(), " total price is wrong");
 		assertEquals(expectedReciptDTO.getTotalVATPrice(), reciptDTONotTesting.getTotalVATPrice(), " totalVATprice is wrong");
-
 	}
 
 }

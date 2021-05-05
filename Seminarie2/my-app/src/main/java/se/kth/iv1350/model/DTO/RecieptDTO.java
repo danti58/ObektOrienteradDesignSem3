@@ -38,11 +38,6 @@ public class RecieptDTO {
 	}
 
 
-/*
- * 
- * 
- * under this line is the testing gets, not used for the real profram
- */
 	public String getStoreName() {
 		return storeName;
 		
