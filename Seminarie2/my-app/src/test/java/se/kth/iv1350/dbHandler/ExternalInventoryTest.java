@@ -48,7 +48,7 @@ public class ExternalInventoryTest {
     @Test
     public void testGetExistingItemQuantityZero(){
 
-        int itemIDToFind = 4;
+        int itemIDToFind = 76;
         int expectedQuantity = 0;
         try {
             externalInventoryToTest.getExistingItem(itemIDToFind);

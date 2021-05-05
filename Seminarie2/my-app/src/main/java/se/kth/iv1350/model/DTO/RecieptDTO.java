@@ -41,7 +41,7 @@ public class RecieptDTO {
 /*
  * 
  * 
- * under this line is the testing gets, not used for the real profram
+ * under this line is the testing gets, not used for the real program
  */
 	
     public String toString(){
@@ -52,8 +52,8 @@ public class RecieptDTO {
         		itemList + "\n" +
         		"total price" + totalPrice + "\n" +
         		"total VAT price" + String.format("%.2f",totalVATPrice) + "\n" +
-        		"payed ammount" + cash + "\n" +
-        		"mony back" + change + "\n";
+        		"payed amount" + cash + "\n" +
+        		"money back" + change + "\n";
     }
 
 	

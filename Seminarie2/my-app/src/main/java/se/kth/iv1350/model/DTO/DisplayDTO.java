@@ -1,7 +1,5 @@
 package se.kth.iv1350.model.DTO;
 
-import java.util.*;
-
 public class DisplayDTO {
 
 	private double runningTotal;

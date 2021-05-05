@@ -39,7 +39,7 @@ public class View {
 			System.out.println("what is the item identifier");
 			
 				itemIdentifier = keyboard.nextInt();
-				contr.addItem(itemIdentifier);
+				System.out.println(contr.addItem(itemIdentifier));
 			
 				System.out.print("Add another item? 1 = yes 0 = no \n");
 				i = keyboard.nextInt();

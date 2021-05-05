@@ -2,7 +2,6 @@ package se.kth.iv1350.model;
 
 import java.util.*;
 
-import se.kth.iv1350.model.DTO.SaleDTO;
 import se.kth.iv1350.model.DTO.DisplayDTO;
 import se.kth.iv1350.model.DTO.RecieptDTO;
 import java.time.LocalTime;
@@ -15,7 +14,6 @@ public class Sale {
 	
 	private String storeName = "ThatFoodStore";
 	private String storeAdress = "ThatStoreAdress 69";
-	private SaleDTO saleDTO;
 	private DisplayDTO displayDTO;
 	private RecieptDTO recieptDTO;
 	private double change;
@@ -31,7 +29,7 @@ public class Sale {
   * Calculates change and how much of the price is VAT to then create a reciept to return to the View so it can print out the reciept.	
   */
 		
-	public RecieptDTO createRecipt(double cash) {
+	public RecieptDTO createRecipt(double cash) throws Exception {
 		
 		calculateChange(cash);
 		calculateTotalVATPrice();
@@ -122,13 +120,6 @@ public class Sale {
 		return runningTotal;
 	}
 
-	public SaleDTO getSaleDTO(int customerIdentification) {
-		return null;
-	}
-
-	public void updateTotalPrice(int priceAfterDiscount) {
-
-	}
 
 	/*
 	*
@@ -144,8 +135,13 @@ public class Sale {
 	/*
 	 * Takes the running total and reduses it with the cash given to the cashier to find out how much change the customer is suppose to get back. 
 	 */
-	private void calculateChange(double cash) {
+	private void calculateChange(double cash) throws Exception {
+
+		if (cash < runningTotal){
+			throw new Exception("Customer cash does not cover running total: " + cash);
+		}
 		change = cash - runningTotal;
+
 	}
 	
 	/*

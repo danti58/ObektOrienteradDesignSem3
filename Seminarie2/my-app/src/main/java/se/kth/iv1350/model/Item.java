@@ -1,8 +1,6 @@
   
 package se.kth.iv1350.model;
 
-import java.util.*;
-
 public class Item {
 
 	public String itemName;
@@ -32,7 +30,7 @@ public class Item {
 
 	public String toString() {
 		
-		return itemName + "item price " +  String.format("%.2f",itemPrice) + "   ammount "+ quantity + "\n";
+		return itemName + " item price " +  String.format("%.2f",itemPrice) + "   ammount "+ quantity + "\n";
 	}
 	
 	
