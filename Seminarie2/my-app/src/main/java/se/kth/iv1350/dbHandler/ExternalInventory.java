@@ -20,6 +20,9 @@ public class ExternalInventory {
 		if (foundItem == null){
 			throw new Exception("The identifier does not exist" + itemIdentifier);
 		}
+		if (foundItem.quantity <= 0){
+			throw new Exception("No item in stock. Item quantity: " + foundItem.quantity);
+		}
 
 		foundItem.quantity = 0;
 
@@ -30,6 +33,11 @@ public class ExternalInventory {
 
 	}
 
+	/*
+	*
+	* Makes the Inventory and adds a few items.
+	*
+	*/
 	public ExternalInventory () {
 		listOfItems = new ArrayList<>();
 		Item tomato = new Item("Tomato", 0, 1.12, 6, 450);

@@ -9,6 +9,12 @@ public class DisplayDTO {
 	private double itemPrice;
 	private String itemName;
 
+
+	/*
+	*
+	* Creates a DisplayDTO
+	*
+	*/
 	public DisplayDTO (double runningTotalIn, double itemVATIn, double itemPriceIn, String itemNameIn) {
 
 		runningTotal = runningTotalIn;

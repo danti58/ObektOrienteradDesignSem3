@@ -26,19 +26,16 @@ public class Sale {
 	}
 	
 		
-	public RecieptDTO createRecipt(int cash) {
-		
-		/*calculateChange(cash);
-		
+	public RecieptDTO createReciept(int cash) {
 
-		RecieptDTO printReci = new RecieptDTO(storeName, storeAdress, itemList, totalPrice, discount,
-				priceVAT, LocalDate.now(), LocalTime.now(), cash, change, priceAfterDiscount);*/
 
 		return null;
 	}
 
 
-	/*Checks if the item has already been added to the sale by comparing itemIdentifiers with
+	/*
+	*
+	* Checks if the item has already been added to the sale by comparing itemIdentifiers with
 	* with Items in the itemList.
 	*/
 	public boolean checkForExistingItem(int itemIdentifier) {
@@ -52,6 +49,13 @@ public class Sale {
 		}
 	}
 
+	/*
+	*
+	* Adds currentItem to the itemList and sends the item to updateItemInSale to update quantity
+	* and make the DisplayDTO that will be returned.
+	*
+	*/
+
 	public DisplayDTO addNewItem(Item currentItem) {
 
 		DisplayDTO informationToBeSentToDisplay = updateItemInSale(currentItem);
@@ -60,15 +64,27 @@ public class Sale {
 		return informationToBeSentToDisplay;
 	}
 
+	/*
+	*
+	* Finds the them with the correct identifier and sends it to updateItemInSale to update quantity
+	* and make a DisplayDTO.
+	* Returns a DisplayDTO with relevant information for the customer.
+	*
+	*/
 	public DisplayDTO addExistingItem(int itemIdentifier){
 
 		Item searchedItem = findItem(itemIdentifier);
 
 		DisplayDTO informationToBeSentToDisplay = updateItemInSale(searchedItem);
 
-
 		return informationToBeSentToDisplay;
 	}
+
+	/*
+	*
+	* Searches for the item with the correctIdentifier
+	*
+	*/
 
 	private Item findItem(int itemIdentifier){
 
@@ -79,6 +95,12 @@ public class Sale {
 		}
 		return null;
 	}
+
+	/*
+	*
+	* Updates the quantity of currentItem and makes a DisplayDTO with relevant information.
+	*
+	*/
 
 	private DisplayDTO updateItemInSale(Item currentItem){
 
@@ -102,6 +124,11 @@ public class Sale {
 
 	}
 
+	/*
+	*
+	* Updates the runningTotal with the price of the item currently being added.
+	*
+	*/
 
 	private void calculateRunningTotal(double itemPrice) {
 		runningTotal += itemPrice;
@@ -112,6 +139,9 @@ public class Sale {
 		change = priceAfterDiscount - cash;
 	}
 
+	/*public int getItemInListQuantity(int itemIdentifier){
+		return findItem(itemIdentifier).quantity;
+	}*/
 
 
 }

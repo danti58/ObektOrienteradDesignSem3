@@ -18,6 +18,13 @@ public class Controller {
 
 	}
 
+	/*
+	*
+	* Checks Sale if the item is already in Sale. If yes it updates the item quantity,
+	* if not it gets the item from externalInventory and adds it to the sale. Returns the
+	* values that needs to be displayed to the customer.
+	*
+	*/
 	public DisplayDTO addItem(int itemIdentifier) throws Exception {
 
 		boolean itemAlreadyAddedThisSale = sale.checkForExistingItem(itemIdentifier);
