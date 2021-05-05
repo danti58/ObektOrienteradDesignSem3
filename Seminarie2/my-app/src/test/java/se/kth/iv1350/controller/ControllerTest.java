@@ -4,19 +4,28 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
+import se.kth.iv1350.dbHandler.ExternalAccounting;
+import se.kth.iv1350.dbHandler.ExternalInventory;
 import se.kth.iv1350.model.DTO.DisplayDTO;
 
 public class ControllerTest {
 
     private Controller controllerToTest;
+    private ExternalInventory extInventory;
+    private ExternalAccounting extAccounting;
 
     @BeforeEach
     public void setup(){
-        controllerToTest = new Controller();
+        extInventory = new ExternalInventory();
+        extAccounting = new ExternalAccounting();
+        controllerToTest = new Controller(extInventory, extAccounting);
+        controllerToTest.startNewSale();
     }
 
     @AfterEach
     public void tearDown(){
+        extInventory = null;
+        extAccounting = null;
         controllerToTest = null;
     }
 
@@ -45,6 +54,8 @@ public class ControllerTest {
         controllerToTest.addItem(itemIdentifierToAdd);
         controllerToTest.addItem(secondItem);
         DisplayDTO supposedCorrect = controllerToTest.addItem(itemIdentifierToAdd);
+
+        System.out.println(supposedCorrect);
 
         assertEquals(correctDisplay.getRunningTotal(), supposedCorrect.getRunningTotal());
         assertEquals(correctDisplay.getItemVAT(), supposedCorrect.getItemVAT());

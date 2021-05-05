@@ -38,4 +38,9 @@ public class DisplayDTO {
 	public String getItemName() {
 		return itemName;
 	}
+
+	public String toString(){
+
+		return runningTotal + " " + itemVAT + " " + itemPrice + " " + itemName;
+	}
 }

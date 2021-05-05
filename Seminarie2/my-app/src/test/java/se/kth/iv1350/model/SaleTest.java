@@ -56,7 +56,6 @@ public class SaleTest {
 
         DisplayDTO supposedCorrect = saleToTest.addNewItem(newItem);
 
-
         assertTrue(saleToTest.checkForExistingItem(4));
         assertEquals(correctDisplay.getRunningTotal(), supposedCorrect.getRunningTotal());
         assertEquals(correctDisplay.getItemVAT(), supposedCorrect.getItemVAT());

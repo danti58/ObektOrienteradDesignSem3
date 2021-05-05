@@ -14,8 +14,15 @@ public class Controller {
 	private ExternalAccounting externalAccounting;
 	private ExternalInventory externalInventory;
 
+
+	public Controller(ExternalInventory externalInventoryIn, ExternalAccounting externalAccountingIn) {
+		externalInventory = externalInventoryIn;
+		externalAccounting = externalAccountingIn;
+
+	}
+
 	public void startNewSale() {
-		Sale sale = new Sale();
+		sale = new Sale();
 	}
 
 	/*
@@ -62,17 +69,10 @@ public class Controller {
 		externalAccounting.updateAccounting(printReci);			
 		externalInventory.updateInventory(printReci);
 		
-		
+		sale = null;
 		
 		return printReci;
 	}
 
-
-	//Temporary, will be updated later
-	public Controller() {
-		sale = new Sale();
-		externalInventory = new ExternalInventory();
-
-	}
 
 }

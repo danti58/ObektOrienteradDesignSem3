@@ -21,7 +21,12 @@ public class Sale {
 	private double change;
 
 	private double totalVATPrice;
-	
+
+	public Sale() {
+		itemList = new ArrayList<>();
+
+	}
+
  /*
   * Calculates change and how much of the price is VAT to then create a reciept to return to the View so it can print out the reciept.	
   */
@@ -36,13 +41,7 @@ public class Sale {
 
 		return printReci;
 	}
-	
-	
-	
-	public Sale() {
-        itemList = new ArrayList<>();
 
-    }
 
 	public boolean checkForExistingItem(int itemIdentifier) {
 

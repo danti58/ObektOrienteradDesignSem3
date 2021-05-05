@@ -7,20 +7,12 @@ import se.kth.iv1350.controller.Controller;
 
 public class Main {
 
-	private View view;
-
-	private ExternalAccounting externalAccounting;
-
-	private ExternalInventory externalInventory;
-
-	private Controller controller;
-	
 	
 	public static void main(String[] args) {
-		Controller contr = new Controller();
-		View view = new View(contr);
-		ExternalAccounting externalAccounting = new ExternalAccounting();
 		ExternalInventory externalInventory = new ExternalInventory();
+		ExternalAccounting externalAccounting = new ExternalAccounting();
+		Controller contr = new Controller(externalInventory, externalAccounting);
+		View view = new View(contr);
 		
 		view.hardcode();
 		
