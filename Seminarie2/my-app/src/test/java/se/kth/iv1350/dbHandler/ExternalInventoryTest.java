@@ -34,9 +34,8 @@ public class ExternalInventoryTest {
     @Test
     public void testGetExistingItemFailed(){
         int itemIDToFind = 34;
-        Item foundItem;
         try {
-            foundItem = externalInventoryToTest.getExistingItem(itemIDToFind);
+            externalInventoryToTest.getExistingItem(itemIDToFind);
             fail("The item was returned");
         } catch (Exception re) {
             assertTrue(re.getMessage().contains(Integer.toString(itemIDToFind)),
