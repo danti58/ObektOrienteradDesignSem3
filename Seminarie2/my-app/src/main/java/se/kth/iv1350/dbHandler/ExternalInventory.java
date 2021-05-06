@@ -51,7 +51,7 @@ public class ExternalInventory {
 		Item toiletPaper = new Item("Toilet paper 6p", 8, 1.25, 40, 27);
 		Item mustard = new Item("Mustard", 76, 1.12, 23, 0);
 
-		Collections.addAll(listOfItems, tomato, egg, prosciutto, meatballs, mustard,
+		Collections.addAll(listOfItems, tomato, egg, prosciutto, meatballs, mtg, mustard,
 				redCabbage, saltAndVinegarChips, coffeeMediumRoast, toiletPaper);
 	}
 
