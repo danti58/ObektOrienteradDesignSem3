@@ -1,6 +1,9 @@
 package se.kth.iv1350.view;
 
 import se.kth.iv1350.controller.Controller;
+import se.kth.iv1350.controller.OperationFailedException;
+import se.kth.iv1350.dbHandler.ItemNotFoundException;
+
 import java.util.Scanner;
 
 
@@ -39,7 +42,11 @@ public class View {
 			System.out.println("what is the item identifier");
 			
 				itemIdentifier = keyboard.nextInt();
-				System.out.println(contr.addItem(itemIdentifier));
+				try {
+					System.out.println(contr.addItem(itemIdentifier));
+				} catch (ItemNotFoundException iteNotFouExc) {
+					System.out.println(iteNotFouExc.getMessage());
+				}
 			
 				System.out.print("Add another item? 1 = yes 0 = no \n");
 				i = keyboard.nextInt();

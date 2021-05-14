@@ -21,7 +21,7 @@ public class ExternalInventoryTest {
     }
 
     @Test
-    public void testGetExistingItemSuccess() throws Exception {
+    public void testGetExistingItemSuccess() throws ItemNotFoundException, ExternalInventoryException {
         int itemIDToFind = 3;
 
         Item foundItem = externalInventoryToTest.getExistingItem(itemIDToFind);
@@ -32,19 +32,19 @@ public class ExternalInventoryTest {
     }
 
     @Test
-    public void testGetExistingItemFailed(){
+    public void testGetExistingItemFailed() throws ExternalInventoryException{
         int itemIDToFind = 34;
         try {
             externalInventoryToTest.getExistingItem(itemIDToFind);
             fail("The item was returned");
-        } catch (Exception re) {
+        } catch (ItemNotFoundException re) {
             assertTrue(re.getMessage().contains(Integer.toString(itemIDToFind)),
                     "Exception message did not contain itemId");
         }
 
     }
 
-    @Test
+    /*@Test
     public void testGetExistingItemQuantityZero(){
 
         int itemIDToFind = 76;
@@ -56,5 +56,5 @@ public class ExternalInventoryTest {
             assertTrue(re.getMessage().contains(Integer.toString(expectedQuantity)),
                     "Exception message did not contain quantity");
         }
-    }
+    }*/
 }

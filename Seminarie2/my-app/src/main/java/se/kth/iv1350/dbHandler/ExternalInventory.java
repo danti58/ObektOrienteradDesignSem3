@@ -9,24 +9,28 @@ public class ExternalInventory {
 
 	private ArrayList<Item> listOfItems;
 
-	public Item getExistingItem(int itemIdentifier) throws Exception {
+	public Item getExistingItem(int itemIdentifier) throws ItemNotFoundException, ExternalInventoryException {
 
-		Item foundItem = null;
-		for (Item searchedItem : listOfItems){
-			if(searchedItem.itemIdentifier == itemIdentifier){
+		if (itemIdentifier == 999){
+			throw new ExternalInventoryException("Database very useful information");
+		}
+
+		Item foundItem;
+		for (Item searchedItem : listOfItems) {
+			if (searchedItem.itemIdentifier == itemIdentifier) {
 				foundItem = searchedItem;
+				foundItem.quantity = 0;
+				return foundItem;
 			}
 		}
-		if (foundItem == null){
-			throw new Exception("The identifier does not exist" + itemIdentifier);
-		}
-		if (foundItem.quantity <= 0){
-			throw new Exception("No item in stock. Item quantity: " + foundItem.quantity);
-		}
 
-		foundItem.quantity = 0;
+			throw new ItemNotFoundException("The identifier does not exist", itemIdentifier);
+		/*if (foundItem.quantity <= 0){
+			throw new ItemNotFoundException("No item in stock. Item quantity: " + foundItem.quantity);
+		}*/
 
-		return foundItem;
+
+
 	}
 
 	public void updateInventory(RecieptDTO printReci) {
