@@ -17,6 +17,7 @@ public class Sale {
 	private DisplayDTO displayDTO;
 	private RecieptDTO recieptDTO;
 	private double change;
+	private List<SaleObserver> saleObservers = new ArrayList<>();
 
 	private double totalVATPrice;
 
@@ -36,10 +37,19 @@ public class Sale {
 
 		RecieptDTO printReci = new RecieptDTO(storeName, storeAdress, itemList, runningTotal,
 				totalVATPrice, LocalDate.now(), LocalTime.now(), cash, change);
-
+		
+		notifyObservers();
 		return printReci;
 	}
 
+
+	private void notifyObservers() {
+	for(SaleObserver obs: saleObservers)
+	{
+		obs.newSale(runningTotal);
+	}
+	
+}
 
 	public boolean checkForExistingItem(int itemIdentifier) {
 
@@ -172,6 +182,10 @@ public class Sale {
 	public double getChange() {
 		
 		return change;	
+	}
+
+	public void addSaleObservers(List<SaleObserver> observers) {
+		saleObservers.addAll(observers);
 	}
 
 }

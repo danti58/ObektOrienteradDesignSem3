@@ -3,20 +3,25 @@ package se.kth.iv1350.controller;
 import se.kth.iv1350.dbHandler.ExternalInventoryException;
 import se.kth.iv1350.dbHandler.ItemNotFoundException;
 import se.kth.iv1350.model.Sale;
+import se.kth.iv1350.model.SaleObserver;
 import se.kth.iv1350.dbHandler.ExternalAccounting;
 import se.kth.iv1350.dbHandler.ExternalInventory;
 import se.kth.iv1350.model.DTO.DisplayDTO;
 import se.kth.iv1350.model.DTO.RecieptDTO;
+import se.kth.iv1350.view.TotalRevenueView;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Controller {
 
 	private Sale sale;
 	private ExternalAccounting externalAccounting;
 	private ExternalInventory externalInventory;
+	private List<SaleObserver> saleObservers = new ArrayList<>();
 
 
 	public Controller(ExternalInventory externalInventoryIn, ExternalAccounting externalAccountingIn) {
@@ -27,6 +32,7 @@ public class Controller {
 
 	public void startNewSale() {
 		sale = new Sale();
+		sale.addSaleObservers(saleObservers);
 	}
 
 	/*
@@ -86,6 +92,11 @@ public class Controller {
 		sale = null;
 		
 		return printReci;
+	}
+
+	public void addObserver(TotalRevenueView obs) {
+		saleObservers.add(obs);
+		
 	}
 
 }
