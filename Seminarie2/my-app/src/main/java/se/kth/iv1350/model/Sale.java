@@ -27,9 +27,19 @@ public class Sale {
 	}
 
  /*
-  * Calculates change and how much of the price is VAT to then create a reciept to return to the View so it can print out the reciept.	
+  *
   */
-		
+
+	/**
+	 * Calculates change and how much of the price is VAT to then create a reciept
+	 * to return to the View so it can print out the reciept.
+	 *
+	 * Notifys observers that a payment has been completed.
+	 *
+	 * @param cash the amount paid
+	 * @return receipt to be printed
+	 * @throws Exception if amount paid is less then or equal to runningTotal
+	 */
 	public RecieptDTO createRecipt(double cash) throws Exception {
 		
 		calculateChange(cash);
@@ -42,7 +52,9 @@ public class Sale {
 		return printReci;
 	}
 
-
+	/**
+	 * Notifys all observers that a change has been made.
+	 */
 	private void notifyObservers() {
 	for(SaleObserver obs: saleObservers)
 	{
@@ -184,6 +196,11 @@ public class Sale {
 		return change;	
 	}
 
+	/**
+	 * Adds all observers from Controller to Sale
+	 *
+	 * @param observers list of observers
+	 */
 	public void addSaleObservers(List<SaleObserver> observers) {
 		saleObservers.addAll(observers);
 	}

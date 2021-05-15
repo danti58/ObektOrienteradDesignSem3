@@ -30,6 +30,10 @@ public class Controller {
 
 	}
 
+	/**
+	 * Construct new Sale
+	 * Sends a list of observers to Sale
+	 */
 	public void startNewSale() {
 		sale = new Sale();
 		sale.addSaleObservers(saleObservers);
@@ -94,6 +98,10 @@ public class Controller {
 		return printReci;
 	}
 
+	/**
+	 * Adds new observer to saleObservers list
+	 * @param obs the class that want to observe Sale
+	 */
 	public void addObserver(TotalRevenueView obs) {
 		saleObservers.add(obs);
 		

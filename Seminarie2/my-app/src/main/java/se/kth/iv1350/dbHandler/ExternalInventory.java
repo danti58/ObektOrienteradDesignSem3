@@ -9,6 +9,15 @@ public class ExternalInventory {
 
 	private ArrayList<Item> listOfItems;
 
+
+	/**
+	 * Finds the Item with the same identifier as the input and returns the Item
+	 *
+	 * @param itemIdentifier identifier for the item to be found
+	 * @return the searched Item
+	 * @throws ItemNotFoundException if the itemIdentifier does not correspond with any of the exiting Items
+	 * @throws ExternalInventoryException if program can not communicate with database(demonstrated by calling with a specific identifier)
+	 */
 	public Item getExistingItem(int itemIdentifier) throws ItemNotFoundException, ExternalInventoryException {
 
 		if (itemIdentifier == 999){
@@ -37,7 +46,7 @@ public class ExternalInventory {
 
 	}
 
-	/*
+	/**
 	*
 	* Makes the Inventory and adds a few items.
 	*
