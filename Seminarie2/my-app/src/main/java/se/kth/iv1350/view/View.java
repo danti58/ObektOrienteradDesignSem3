@@ -24,6 +24,8 @@ public class View {
 
 	public View (Controller contr) {
 		this.contr = contr;
+		contr.addObserver(new TotalRevenueView());
+		
 	
 	}
 	
@@ -37,6 +39,7 @@ public class View {
 		System.out.println("Start new sale? 1 = yes 0 = shut down");
 		j = keyboard.nextInt();
 		while(j == 1) {
+			i = 1;
 			contr.startNewSale();
 			while (i != 0) {
 			System.out.println("what is the item identifier");
