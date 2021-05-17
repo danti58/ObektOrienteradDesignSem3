@@ -2,6 +2,8 @@ package se.kth.iv1350.controller;
 
 import se.kth.iv1350.dbHandler.ExternalInventoryException;
 import se.kth.iv1350.dbHandler.ItemNotFoundException;
+import se.kth.iv1350.model.DTO.SaleDTO;
+import se.kth.iv1350.model.Discount;
 import se.kth.iv1350.model.Sale;
 import se.kth.iv1350.model.SaleObserver;
 import se.kth.iv1350.dbHandler.ExternalAccounting;
@@ -10,7 +12,6 @@ import se.kth.iv1350.model.DTO.DisplayDTO;
 import se.kth.iv1350.model.DTO.RecieptDTO;
 import se.kth.iv1350.view.TotalRevenueView;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,14 +20,16 @@ import java.util.List;
 public class Controller {
 
 	private Sale sale;
+	private Discount discount;
 	private ExternalAccounting externalAccounting;
 	private ExternalInventory externalInventory;
 	private List<SaleObserver> saleObservers = new ArrayList<>();
 
 
-	public Controller(ExternalInventory externalInventoryIn, ExternalAccounting externalAccountingIn) {
+	public Controller(ExternalInventory externalInventoryIn, ExternalAccounting externalAccountingIn, Discount discount) {
 		externalInventory = externalInventoryIn;
 		externalAccounting = externalAccountingIn;
+		this.discount = discount;
 
 	}
 
@@ -96,6 +99,24 @@ public class Controller {
 		sale = null;
 		
 		return printReci;
+	}
+
+	/**
+	 * Gets information from sale and sends it to discount to calculate a new price.
+	 *
+	 * @param customerIdentification customers identification to check for discount
+	 * @return the price calculated after discount has been applied
+	 */
+
+	public double priceAfterDiscount(int customerIdentification){
+
+		double newPrice;
+		SaleDTO saleInformation = sale.getSaleDTO(customerIdentification);
+		newPrice = discount.calculateDiscount(saleInformation);
+
+		sale.updateTotalPrice(newPrice);
+
+		return newPrice;
 	}
 
 	/**

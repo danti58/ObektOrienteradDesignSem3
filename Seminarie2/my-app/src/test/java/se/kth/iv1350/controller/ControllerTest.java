@@ -11,8 +11,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 
 
+import se.kth.iv1350.dbHandler.CustomerRegistry;
 import se.kth.iv1350.dbHandler.ExternalAccounting;
 import se.kth.iv1350.dbHandler.ExternalInventory;
+import se.kth.iv1350.model.Discount;
 import se.kth.iv1350.model.Item;
 import se.kth.iv1350.model.Sale;
 import se.kth.iv1350.model.DTO.DisplayDTO;
@@ -27,12 +29,16 @@ public class ControllerTest {
 	private ExternalInventory extInventory;
     private ExternalAccounting extAccounting;
     private Sale sale;
+    private Discount discount;
+    private CustomerRegistry customerRegistry;
 	
     @BeforeEach
     public void setup(){
     	extInventory = ExternalInventory.getExternalInventory();
         extAccounting = ExternalAccounting.getExternalAccounting();
-        controllerToTest = new Controller(extInventory, extAccounting);
+        customerRegistry = new CustomerRegistry();
+        discount = new Discount(customerRegistry);
+        controllerToTest = new Controller(extInventory, extAccounting, discount);
         controllerToTest.startNewSale();
 
     }

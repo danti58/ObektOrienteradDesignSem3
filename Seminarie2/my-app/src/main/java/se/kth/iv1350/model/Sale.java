@@ -4,6 +4,8 @@ import java.util.*;
 
 import se.kth.iv1350.model.DTO.DisplayDTO;
 import se.kth.iv1350.model.DTO.RecieptDTO;
+import se.kth.iv1350.model.DTO.SaleDTO;
+
 import java.time.LocalTime;
 import java.time.LocalDate;
 
@@ -19,6 +21,7 @@ public class Sale {
 	private double change;
 	private List<SaleObserver> saleObservers = new ArrayList<>();
 
+	private double priceAfterDiscount;
 	private double totalVATPrice;
 
 	public Sale() {
@@ -152,6 +155,29 @@ public class Sale {
 	private void calculateRunningTotal(double itemPrice) {
 		runningTotal += itemPrice;
 
+	}
+
+	/**
+	 * Creates a SaleDTO that will be used for calculating discount
+	 *
+	 * @param customerIdentification used for calculating discount later
+	 * @return a SaleDTO with relevant information for the discount calculation
+	 */
+
+	public SaleDTO getSaleDTO(int customerIdentification) {
+
+		SaleDTO saleInformation = new SaleDTO(itemList, customerIdentification, runningTotal);
+		return saleInformation;
+	}
+
+	/**
+	 * Updates sale with a new price after Discount
+	 *
+	 * @param priceAfterDiscount the new price of the sale
+	 */
+
+	public void updateTotalPrice(double priceAfterDiscount) {
+		this.priceAfterDiscount = priceAfterDiscount;
 	}
 
 	/*
