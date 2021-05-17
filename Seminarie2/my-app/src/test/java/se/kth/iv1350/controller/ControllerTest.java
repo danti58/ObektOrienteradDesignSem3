@@ -14,7 +14,7 @@ import org.junit.jupiter.api.AfterEach;
 import se.kth.iv1350.dbHandler.CustomerRegistry;
 import se.kth.iv1350.dbHandler.ExternalAccounting;
 import se.kth.iv1350.dbHandler.ExternalInventory;
-import se.kth.iv1350.model.Discount;
+import se.kth.iv1350.model.discount.Discount;
 import se.kth.iv1350.model.Item;
 import se.kth.iv1350.model.Sale;
 import se.kth.iv1350.model.DTO.DisplayDTO;

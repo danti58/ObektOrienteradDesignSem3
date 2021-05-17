@@ -1,14 +1,16 @@
-package se.kth.iv1350.model;
+package se.kth.iv1350.model.discount;
 
 import se.kth.iv1350.dbHandler.CustomerRegistry;
 import se.kth.iv1350.model.DTO.CustomerDTO;
 import se.kth.iv1350.model.DTO.SaleDTO;
 
-public class Discount {
+public interface DiscountAvailability {
 
-    private CustomerRegistry customerRegistry;
+    //CustomerRegistry customerRegistry;
 
-    public Discount(CustomerRegistry customerRegistry){
+    double calculateDiscount(SaleDTO saleInfo);
+
+    /*public Discount(CustomerRegistry customerRegistry){
         this.customerRegistry = customerRegistry;
     }
 
@@ -24,6 +26,7 @@ public class Discount {
         }
 
         return newPrice;
-    }
+    }*/
 
 }
+

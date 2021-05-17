@@ -6,7 +6,7 @@ public class CustomerDTO {
     private int customerIdentification;
     private double amountOfDiscount;
 
-    public CustomerDTO(String name, int customerIdentification, double amountOfDiscount){
+    public CustomerDTO(String name, int customerIdentification){
 
         this.name = name;
         this.customerIdentification = customerIdentification;
@@ -17,7 +17,4 @@ public class CustomerDTO {
         return this.customerIdentification;
     }
 
-    public double getAmountOfDiscount(){
-        return this.amountOfDiscount;
-    }
 }

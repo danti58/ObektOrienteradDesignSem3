@@ -1,7 +1,7 @@
 package se.kth.iv1350.startup;
 
 import se.kth.iv1350.dbHandler.CustomerRegistry;
-import se.kth.iv1350.model.Discount;
+import se.kth.iv1350.model.discount.Discount;
 import se.kth.iv1350.view.View;
 import se.kth.iv1350.dbHandler.ExternalAccounting;
 import se.kth.iv1350.dbHandler.ExternalInventory;

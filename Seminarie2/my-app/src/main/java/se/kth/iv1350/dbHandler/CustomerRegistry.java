@@ -9,10 +9,10 @@ public class CustomerRegistry {
     private ArrayList<CustomerDTO> customerList;
 
     public CustomerRegistry(){
-        CustomerDTO lad = new CustomerDTO("Lad", 0, 0.9);
-        CustomerDTO chad = new CustomerDTO("Chad", 1, 0.9);
-        CustomerDTO lilly = new CustomerDTO("Lilly", 2, 0.85);
-        CustomerDTO jace = new CustomerDTO("Jace", 3, 0.95);
+        CustomerDTO lad = new CustomerDTO("Lad", 0);
+        CustomerDTO chad = new CustomerDTO("Chad", 1);
+        CustomerDTO lilly = new CustomerDTO("Lilly", 2);
+        CustomerDTO jace = new CustomerDTO("Jace", 3);
     }
 
     public CustomerDTO findCustomer(int customerIdentification){
