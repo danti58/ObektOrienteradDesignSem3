@@ -12,7 +12,7 @@ public class ExternalInventoryTest {
 
     @BeforeEach
     public void setup(){
-        externalInventoryToTest = new ExternalInventory();
+        externalInventoryToTest = ExternalInventory.getExternalInventory();
     }
 
     @AfterEach
@@ -42,6 +42,20 @@ public class ExternalInventoryTest {
                     "Exception message did not contain itemId");
         }
 
+    }
+
+    @Test
+    public void testGetExistingItemFailedDatabase() throws ItemNotFoundException{
+        int itemIDToFind = 999;
+        String expectedResult = "Database very useful information";
+
+        try {
+            externalInventoryToTest.getExistingItem(itemIDToFind);
+            fail("Database connection error did not throw exception");
+        } catch (ExternalInventoryException re){
+            assertEquals(expectedResult, re.getMessage());
+
+        }
     }
 
     /*@Test

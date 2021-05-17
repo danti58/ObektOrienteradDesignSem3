@@ -7,6 +7,7 @@ import se.kth.iv1350.model.DTO.RecieptDTO;
 
 public class ExternalInventory {
 
+	private static final ExternalInventory singletonInventory = new ExternalInventory();
 	private ArrayList<Item> listOfItems;
 
 
@@ -46,12 +47,16 @@ public class ExternalInventory {
 
 	}
 
+	public static ExternalInventory getExternalInventory(){
+		return singletonInventory;
+	}
+
 	/**
 	*
 	* Makes the Inventory and adds a few items.
 	*
 	*/
-	public ExternalInventory () {
+	private ExternalInventory () {
 		listOfItems = new ArrayList<>();
 		Item tomato = new Item("Tomato", 0, 1.12, 6, 450);
 		Item egg = new Item("Egg", 1, 1.12, 2, 400);

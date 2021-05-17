@@ -10,9 +10,7 @@ public class Main {
 	
 
 	public static void main(String[] args) throws Exception {
-		ExternalInventory externalInventory = new ExternalInventory();
-        ExternalAccounting externalAccounting = new ExternalAccounting();
-        Controller contr = new Controller(externalInventory, externalAccounting);
+        Controller contr = new Controller(ExternalInventory.getExternalInventory(), ExternalAccounting.getExternalAccounting());
         View view = new View(contr);
 
         view.hardcode();

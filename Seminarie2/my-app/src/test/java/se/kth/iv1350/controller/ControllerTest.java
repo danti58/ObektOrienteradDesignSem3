@@ -30,8 +30,8 @@ public class ControllerTest {
 	
     @BeforeEach
     public void setup(){
-    	extInventory = new ExternalInventory();
-        extAccounting = new ExternalAccounting();
+    	extInventory = ExternalInventory.getExternalInventory();
+        extAccounting = ExternalAccounting.getExternalAccounting();
         controllerToTest = new Controller(extInventory, extAccounting);
         controllerToTest.startNewSale();
 

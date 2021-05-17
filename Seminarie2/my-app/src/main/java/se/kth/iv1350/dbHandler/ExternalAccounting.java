@@ -6,14 +6,15 @@ import se.kth.iv1350.model.DTO.RecieptDTO;
 
 public class ExternalAccounting {
 
+	private static final ExternalAccounting singletonAccounting = new ExternalAccounting();
 	private ArrayList pastPurchaseList;
+
+	public static ExternalAccounting getExternalAccounting(){
+		return singletonAccounting;
+	}
 
 	public void updateAccounting(RecieptDTO printReci) {
 		
-	}
-
-	public ExternalAccounting ExternalAcconting() {
-		return null;
 	}
 
 }
