@@ -10,6 +10,7 @@ import se.kth.iv1350.dbHandler.ExternalAccounting;
 import se.kth.iv1350.dbHandler.ExternalInventory;
 import se.kth.iv1350.model.DTO.DisplayDTO;
 import se.kth.iv1350.model.DTO.RecieptDTO;
+import se.kth.iv1350.model.discount.DiscountAvailability;
 import se.kth.iv1350.view.TotalRevenueView;
 
 import java.io.FileWriter;
@@ -17,15 +18,29 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is the communicator between the view and other parts of the program.
+ * It handles no logic and only sends out calls to the correct classes
+ *
+ */
+
 public class Controller {
 
 	private Sale sale;
 	private Discount discount;
+	private DiscountAvailability discountAvailability;
 	private ExternalAccounting externalAccounting;
 	private ExternalInventory externalInventory;
 	private List<SaleObserver> saleObservers = new ArrayList<>();
 
 
+	/**
+	 * Creates a new controller object
+	 *
+	 * @param externalInventoryIn reference to the external inventory
+	 * @param externalAccountingIn reference to external accounting system
+	 * @param discount reference to the discount class
+	 */
 	public Controller(ExternalInventory externalInventoryIn, ExternalAccounting externalAccountingIn, Discount discount) {
 		externalInventory = externalInventoryIn;
 		externalAccounting = externalAccountingIn;
@@ -42,13 +57,16 @@ public class Controller {
 		sale.addSaleObservers(saleObservers);
 	}
 
-	/*
-	*
-	* Checks Sale if the item is already in Sale. If yes it updates the item quantity,
-	* if not it gets the item from externalInventory and adds it to the sale. Returns the
-	* values that needs to be displayed to the customer.
-	*
-	*/
+	/**
+	 * Checks Sale if the item is already in Sale. If yes it updates the item quantity,
+	 * if not it gets the item from externalInventory and adds it to the sale.
+	 *
+	 * @param itemIdentifier identifier used for searching a item
+	 * @return relevant item information and running total
+	 * @throws ItemNotFoundException if the itemIdentifier does not correspond with any of the exiting Items
+	 * @throws OperationFailedException if failed to connect to database
+	 */
+
 	public DisplayDTO addItem(int itemIdentifier) throws ItemNotFoundException, OperationFailedException {
 
 
@@ -63,31 +81,33 @@ public class Controller {
 				displayMessage = sale.addNewItem(externalInventory.getExistingItem(itemIdentifier));
 			} catch (ExternalInventoryException extInvExc) {
 				try {
-					FileWriter writer = new FileWriter("C:\\Users\\Dante\\IdeaProjects\\ObjektOrienterad\\Sem3\\Seminarie2\\my-app\\Output\\ErrorMessages.txt");
+					FileWriter writer = new FileWriter("errorMessage.txt");
 					writer.write(extInvExc.getMessage());
 					writer.close();
 					throw new OperationFailedException("Could not connect to server");
 				} catch (IOException IOe){
 					System.out.println("FileWriter error");
 				}
-				//logStream = new PrintWriter(new FileWriter("errorInformation.txt"), true);
 			}
 
 		}
 		return displayMessage;
 	}
 
-	/*
-	 * gets the total price from sale, and gives it to the view so the cashier can tell the customer what the cost is
+	/**
+	 * gets the total price from sale, and gives it to the view
+	 * so the cashier can tell the customer what the cost is
 	 */
 	public double endSale() {
-		return sale.getTotalPrice();
+		return sale.endSale();
 	}
 
-	/*
-	 * 
-	 * Gets all the important information from sale for the receipt and returns it to the viw as a DTO
-	 * 
+	/**
+	 * Gets all the important information from sale for the receipt and returns it to the view as a DTO
+	 *
+	 * @param cash the amount paid by the customer
+	 * @return All the information of the sale in the form of a receipt
+	 * @throws Exception of cash is less then running total
 	 */
 	public RecieptDTO paymentTransaction(double cash) throws Exception {
 		
@@ -110,13 +130,15 @@ public class Controller {
 
 	public double priceAfterDiscount(int customerIdentification){
 
-		double newPrice;
+		double priceAfterDiscount;
+
 		SaleDTO saleInformation = sale.getSaleDTO(customerIdentification);
-		newPrice = discount.calculateDiscount(saleInformation);
+		discountAvailability = discount.decideDiscount(saleInformation);
 
-		sale.updateTotalPrice(newPrice);
+		priceAfterDiscount = discountAvailability.calculateDiscount(saleInformation.getRunningTotal());
+		sale.updateTotalPrice(priceAfterDiscount);
 
-		return newPrice;
+		return priceAfterDiscount;
 	}
 
 	/**

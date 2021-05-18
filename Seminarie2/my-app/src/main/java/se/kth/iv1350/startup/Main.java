@@ -7,11 +7,17 @@ import se.kth.iv1350.dbHandler.ExternalAccounting;
 import se.kth.iv1350.dbHandler.ExternalInventory;
 import se.kth.iv1350.controller.Controller;
 
+/**
+ * The first part of the program that runs on startup
+ *
+ */
 public class Main {
 
-	
-
-	public static void main(String[] args) throws Exception {
+    /**
+     * The startup of the program constructing the main classes used in the system
+     *
+     */
+	public static void main(String[] args) {
         CustomerRegistry customerRegistry = new CustomerRegistry();
         Discount discount = new Discount(customerRegistry);
         Controller contr = new Controller(ExternalInventory.getExternalInventory(), ExternalAccounting.getExternalAccounting(), discount);

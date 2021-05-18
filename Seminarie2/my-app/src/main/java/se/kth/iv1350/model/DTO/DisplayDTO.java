@@ -1,5 +1,9 @@
 package se.kth.iv1350.model.DTO;
 
+/**
+ * A class used for representing the information to be displayed to the customer
+ *
+ */
 public class DisplayDTO {
 
 	private double runningTotal;
@@ -8,11 +12,14 @@ public class DisplayDTO {
 	private String itemName;
 
 
-	/*
-	*
-	* Creates a DisplayDTO
-	*
-	*/
+	/**
+	 * Creates a new instance of a DisplayDTO
+	 *
+	 * @param runningTotalIn current total price of the sale
+	 * @param itemVATIn vat of the item being added
+	 * @param itemPriceIn price of the item being added
+	 * @param itemNameIn name of the item being added
+	 */
 	public DisplayDTO (double runningTotalIn, double itemVATIn, double itemPriceIn, String itemNameIn) {
 
 		runningTotal = runningTotalIn;
@@ -37,6 +44,11 @@ public class DisplayDTO {
 		return itemName;
 	}
 
+	/**
+	 * String representation of DisplayDTO
+	 *
+	 * @return a string representation of DisplayDTO
+	 */
 	public String toString(){
 
 		return runningTotal + " " + itemVAT + " " + itemPrice + " " + itemName;

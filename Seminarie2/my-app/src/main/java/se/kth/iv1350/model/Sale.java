@@ -9,6 +9,12 @@ import se.kth.iv1350.model.DTO.SaleDTO;
 import java.time.LocalTime;
 import java.time.LocalDate;
 
+/**
+ * This class handles majority of the logistics for the sale.
+ * It calculates prices and stores all the information of the current purchase
+ *
+ */
+
 public class Sale {
 
 	private ArrayList<Item> itemList;
@@ -21,17 +27,19 @@ public class Sale {
 	private double change;
 	private List<SaleObserver> saleObservers = new ArrayList<>();
 
-	private double priceAfterDiscount;
+	private double priceBeforeDiscount;
 	private double totalVATPrice;
 
+	/**
+	 * Creates a instance that represents the sale and instantiates the itemList.
+	 *
+	 */
 	public Sale() {
 		itemList = new ArrayList<>();
 
+
 	}
 
- /*
-  *
-  */
 
 	/**
 	 * Calculates change and how much of the price is VAT to then create a reciept
@@ -49,7 +57,7 @@ public class Sale {
 		calculateTotalVATPrice();
 
 		RecieptDTO printReci = new RecieptDTO(storeName, storeAdress, itemList, runningTotal,
-				totalVATPrice, LocalDate.now(), LocalTime.now(), cash, change);
+				totalVATPrice, LocalDate.now(), LocalTime.now(), cash, change, (priceBeforeDiscount-runningTotal));
 		
 		notifyObservers();
 		return printReci;
@@ -66,6 +74,13 @@ public class Sale {
 	
 }
 
+	/**
+	 * Checks if an item currently exists in the Sale.
+	 *
+ 	 * @param itemIdentifier the identifier of the item being searched for
+	 * @return a boolean with true if the item is found and false if it's not found
+	 */
+
 	public boolean checkForExistingItem(int itemIdentifier) {
 
 		Item existingItem = findItem(itemIdentifier);
@@ -77,14 +92,16 @@ public class Sale {
 		}
 	}
 
-	/*
-	*
-	* Adds currentItem to the itemList and sends the item to updateItemInSale to update quantity
-	* and make the DisplayDTO that will be returned.
-	*
-	*/
+	/**
+	 * Adds the new Item to the Sale and creates a displayDTO with information about
+	 * the newItem and the current running total
+	 *
+	 * @param currentItem the new item being added to the sale
+	 * @return displayDTO with information that will be displayed to the customer
+	 */
 
 	public DisplayDTO addNewItem(Item currentItem) {
+
 
 		DisplayDTO informationToBeSentToDisplay = updateItemInSale(currentItem);
 		itemList.add(currentItem);
@@ -92,13 +109,13 @@ public class Sale {
 		return informationToBeSentToDisplay;
 	}
 
-	/*
-	*
-	* Finds the them with the correct identifier and sends it to updateItemInSale to update quantity
-	* and make a DisplayDTO.
-	* Returns a DisplayDTO with relevant information for the customer.
-	*
-	*/
+	/**
+	 * Finds the item corresponding with the identifier in the sale and updates it's quantity.
+	 * Then creates a DisplayDTO with information about the newItem and the current running total
+	 *
+	 * @param itemIdentifier the identifier of the item to update quantity of
+	 * @return displayDTO with information that will be displayed to the customer
+	 */
 	public DisplayDTO addExistingItem(int itemIdentifier){
 
 		Item searchedItem = findItem(itemIdentifier);
@@ -108,11 +125,12 @@ public class Sale {
 		return informationToBeSentToDisplay;
 	}
 
-	/*
-	*
-	* Searches for the item with the correctIdentifier
-	*
-	*/
+	/**
+	 * Searches for the item with the correct identifier
+	 *
+	 * @param itemIdentifier the identifier of the item being searched for
+	 * @return the searched item or null if the item is not currently in the sale
+	 */
 
 	private Item findItem(int itemIdentifier){
 
@@ -124,11 +142,12 @@ public class Sale {
 		return null;
 	}
 
-	/*
-	*
-	* Updates the quantity of currentItem and makes a DisplayDTO with relevant information.
-	*
-	*/
+	/**
+	 * Updates the quantity of currentItem and makes a DisplayDTO with relevant information.
+	 *
+	 * @param currentItem the item to get a updated quantity
+	 * @return a displayDTO with information that will be displayed to the customer
+	 */
 
 	private DisplayDTO updateItemInSale(Item currentItem){
 
@@ -141,16 +160,23 @@ public class Sale {
 	}
 
 
-	public double getTotalPrice() {
+	/**
+	 * Sets priceBeforeDiscount to runningTotal in case there
+	 * is no discount being asked for
+	 *
+	 * @return running total of the sale before discount
+	 */
+	public double endSale() {
+		priceBeforeDiscount = runningTotal;
 		return runningTotal;
 	}
 
 
-	/*
-	*
-	* Updates the runningTotal with the price of the item currently being added.
-	*
-	*/
+	/**
+	 * Updates the runningTotal with the price of the item currently being added.
+	 *
+	 * @param itemPrice the price of the item being added to the sale
+	 */
 
 	private void calculateRunningTotal(double itemPrice) {
 		runningTotal += itemPrice;
@@ -177,11 +203,16 @@ public class Sale {
 	 */
 
 	public void updateTotalPrice(double priceAfterDiscount) {
-		this.priceAfterDiscount = priceAfterDiscount;
+		this.priceBeforeDiscount = runningTotal;
+		this.runningTotal = priceAfterDiscount;
 	}
 
-	/*
-	 * Takes the running total and reduses it with the cash given to the cashier to find out how much change the customer is suppose to get back. 
+	/**
+	 * Takes the running total and reduces it with the cash
+	 * given to the cashier to find out how much change the customer is supposed to get back.
+	 *
+	 * @param cash the amount paid by the customer
+	 * @throws Exception when the amount paid is less then the total price
 	 */
 	private void calculateChange(double cash) throws Exception {
 
@@ -191,10 +222,12 @@ public class Sale {
 		change = cash - runningTotal;
 
 	}
-	
-	/*
+
+	/**
 	 * Calculates how much of the total price that the customer is paying is from VAT.
-	 * By taking the price of the items from the itemList and multyplying it by the VAT and 0.01 (as the % is not saved in decimals)
+	 * By taking the price of the items from the itemList and multiplying it by the VAT and
+	 * 0.01 (as the % is not saved in decimals)
+	 *
 	 */
 	private void calculateTotalVATPrice(){
 		totalVATPrice = 0;
@@ -203,14 +236,6 @@ public class Sale {
 		    totalVATPrice += var.itemPrice - (var.itemPrice / var.itemVAT);
 		}
 	}
-
-	/*
-	 * 
-	 * Bellow this line are functions only used for testing
-	 * 
-	 * 
-	 */
-
 
 	public void setRunningTotal(double amountToSet) {
 		runningTotal = amountToSet;

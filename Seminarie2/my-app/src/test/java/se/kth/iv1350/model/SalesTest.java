@@ -58,7 +58,7 @@ public class SalesTest {
 		itemListToComapre.add(anotherItem);
 		
 		RecieptDTO expectedReciptDTO = new RecieptDTO("ThatFoodStore", "ThatStoreAdress 69", itemListToComapre, ammountRunningTotal,
-				totalVATPrice, LocalDate.now(), LocalTime.now(), ammountGivenToCashier, change);
+				totalVATPrice, LocalDate.now(), LocalTime.now(), ammountGivenToCashier, change, 0);
 
 		
 		assertEquals(expectedReciptDTO.getCash(), reciptDTONotTesting.getCash(), " cash is wrong");
