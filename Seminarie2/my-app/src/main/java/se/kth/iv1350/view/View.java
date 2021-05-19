@@ -3,6 +3,7 @@ package se.kth.iv1350.view;
 import se.kth.iv1350.controller.Controller;
 import se.kth.iv1350.controller.OperationFailedException;
 import se.kth.iv1350.dbHandler.ItemNotFoundException;
+import se.kth.iv1350.model.TotalRevenueFileOutput;
 
 import java.util.Scanner;
 
@@ -29,7 +30,7 @@ public class View {
 	public View (Controller contr) {
 		this.contr = contr;
 		contr.addObserver(new TotalRevenueView());
-		
+		contr.addObserver(new TotalRevenueFileOutput());
 	
 	}
 

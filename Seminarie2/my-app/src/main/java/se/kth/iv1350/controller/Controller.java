@@ -31,7 +31,7 @@ public class Controller {
 	private DiscountAvailability discountAvailability;
 	private ExternalAccounting externalAccounting;
 	private ExternalInventory externalInventory;
-	private List<SaleObserver> saleObservers = new ArrayList<>();
+	private List<SaleObserver> saleObservers;
 
 
 	/**
@@ -45,7 +45,7 @@ public class Controller {
 		externalInventory = externalInventoryIn;
 		externalAccounting = externalAccountingIn;
 		this.discount = discount;
-
+		saleObservers = new ArrayList<>();
 	}
 
 	/**
@@ -145,7 +145,7 @@ public class Controller {
 	 * Adds new observer to saleObservers list
 	 * @param obs the class that want to observe Sale
 	 */
-	public void addObserver(TotalRevenueView obs) {
+	public void addObserver(SaleObserver obs) {
 		saleObservers.add(obs);
 		
 	}
